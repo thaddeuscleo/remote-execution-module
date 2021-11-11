@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"github.com/slc-na/roomnetman-cli/models"
+	"github.com/slc-na/roomnetman-cli/utils"
 )
 
 var PsExecBinary []byte
@@ -30,15 +31,18 @@ func psExec(command models.Command) {
 func runCommand(cmd *exec.Cmd, compNum string) {
 	err := cmd.Start()
 	if err != nil {
-		fmt.Printf("[failed] executing script %s\n", compNum)
+		content := fmt.Sprintf("executing script %s\n", compNum)
+		utils.LogError(content)
 		return
 	}
 	errRun := cmd.Wait()
 	if errRun != nil {
-		fmt.Printf("[failed] finish with err %s: %s\n", compNum, errRun)
+		content := fmt.Sprintf("finish with err %s: %s\n", compNum, errRun)
+		utils.LogError(content)
 		return
 	}
-	fmt.Printf("[success] executing script %s\n", compNum)
+	content := fmt.Sprintf("executing script %s\n", compNum)
+	utils.LogSuccess(content)
 }
 
 func unpackBinary() {

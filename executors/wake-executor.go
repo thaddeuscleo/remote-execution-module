@@ -8,6 +8,7 @@ import (
 
 	"github.com/slc-na/roomnetman-cli/database"
 	"github.com/slc-na/roomnetman-cli/models"
+	"github.com/slc-na/roomnetman-cli/utils"
 )
 
 type MagicPacket [102]byte
@@ -17,7 +18,8 @@ func wakeExec(command models.Command) {
 	for _, computer := range command.Computers {
 		waitGroup.Add(1)
 		ipaddress := fmt.Sprintf("10.22.%s.%s", computer.Room, computer.Number)
-		fmt.Printf("[info] waking up: %s\n", ipaddress)
+		content := fmt.Sprintf("waking up: %s\n", ipaddress)
+		utils.LogInfo(content)
 		mac := database.DB().GetComputerMacAddress(ipaddress)
 		go func(mac string, computer models.Computer) {
 			if packet, err := createMagicPacket(mac); err == nil {

@@ -6,9 +6,9 @@ import (
 	"net"
 	"sync"
 
-	"github.com/slc-na/ruman-execution-module/database"
-	"github.com/slc-na/ruman-execution-module/models"
-	"github.com/slc-na/ruman-execution-module/utils"
+	"github.com/thaddeuscleo/ruman-execution-module/database"
+	"github.com/thaddeuscleo/ruman-execution-module/models"
+	"github.com/thaddeuscleo/ruman-execution-module/utils"
 )
 
 type MagicPacket [102]byte

@@ -7,8 +7,8 @@ import (
 	"os/exec"
 	"sync"
 
-	"github.com/slc-na/ruman-execution-module/models"
-	"github.com/slc-na/ruman-execution-module/utils"
+	"github.com/thaddeuscleo/ruman-execution-module/models"
+	"github.com/thaddeuscleo/ruman-execution-module/utils"
 )
 
 var PsExecBinary []byte

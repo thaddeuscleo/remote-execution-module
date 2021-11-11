@@ -1,10 +1,10 @@
 package executors
 
-import (
-	"github.com/slc-na/roomnetman-cli/models"
-)
+import "github.com/slc-na/ruman-execution-module/models"
 
-func ExecuteCommand(command models.Command) {
+type GoExecution models.GoExecution
+
+func (command GoExecution) ExecuteCommand() {
 	switch command.Type {
 	case "run":
 		psExec(command)
@@ -24,5 +24,15 @@ func ExecuteCommand(command models.Command) {
 	case "restart":
 		command.Cmd = "shutdown /r /f /t 0"
 		psExec(command)
+	}
+}
+
+func (execCommand GoExecution) SetExecutionCommand(command models.Command) GoExecution {
+	return GoExecution{
+		User:      command.User,
+		Password:  command.Password,
+		Cmd:       command.Cmd,
+		Computers: command.Computers,
+		Type:      command.Type,
 	}
 }

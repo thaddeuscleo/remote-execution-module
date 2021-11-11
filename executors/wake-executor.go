@@ -6,14 +6,14 @@ import (
 	"net"
 	"sync"
 
-	"github.com/slc-na/roomnetman-cli/database"
-	"github.com/slc-na/roomnetman-cli/models"
-	"github.com/slc-na/roomnetman-cli/utils"
+	"github.com/slc-na/ruman-execution-module/database"
+	"github.com/slc-na/ruman-execution-module/models"
+	"github.com/slc-na/ruman-execution-module/utils"
 )
 
 type MagicPacket [102]byte
 
-func wakeExec(command models.Command) {
+func wakeExec(command GoExecution) {
 	var waitGroup sync.WaitGroup
 	for _, computer := range command.Computers {
 		waitGroup.Add(1)

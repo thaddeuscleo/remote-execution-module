@@ -1,5 +1,7 @@
 package models
 
+type GoExecution Command
+
 // Describe the command type and target
 type Command struct {
 	Cmd       string     // The command that will be executed (optional)

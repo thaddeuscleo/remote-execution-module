@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/slc-na/roomnetman-cli/models"
+	"github.com/slc-na/ruman-execution-module/models"
 )
 
 func GetUserArgs() models.Command {

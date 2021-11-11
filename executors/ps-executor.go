@@ -1,3 +1,4 @@
+// This package contains executor file
 package executors
 
 import (
@@ -6,13 +7,13 @@ import (
 	"os/exec"
 	"sync"
 
-	"github.com/slc-na/roomnetman-cli/models"
-	"github.com/slc-na/roomnetman-cli/utils"
+	"github.com/slc-na/ruman-execution-module/models"
+	"github.com/slc-na/ruman-execution-module/utils"
 )
 
 var PsExecBinary []byte
 
-func psExec(command models.Command) {
+func psExec(command GoExecution) {
 	unpackBinary()
 	var waitGroup sync.WaitGroup
 	fmt.Printf("[info] Execution will be timed out after 5 seconds\n")

@@ -1,6 +1,6 @@
-# Ruman Execution Module
+# Remote Execution Module
 
-Ruman Execution Module is a lightweight psexec based executor with additional features. 
+Remote Execution Module is a lightweight psexec based executor with additional features. 
 This module can be also used as a cli tool for managing rooms, you can see the usage example below.
 
 ## Compilation

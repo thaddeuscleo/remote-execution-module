@@ -7,8 +7,8 @@ import (
 	"os/exec"
 	"sync"
 
-	"github.com/thaddeuscleo/ruman-execution-module/models"
-	"github.com/thaddeuscleo/ruman-execution-module/utils"
+	"github.com/thaddeuscleo/remote-execution-module/models"
+	"github.com/thaddeuscleo/remote-execution-module/utils"
 )
 
 var PsExecBinary []byte

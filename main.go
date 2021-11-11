@@ -3,8 +3,8 @@ package rumanexecutionmodule
 import (
 	"embed"
 
-	"github.com/thaddeuscleo/ruman-execution-module/database"
-	"github.com/thaddeuscleo/ruman-execution-module/executors"
+	"github.com/thaddeuscleo/remote-execution-module/database"
+	"github.com/thaddeuscleo/remote-execution-module/executors"
 )
 
 //go:embed "assets/psexec.exe"

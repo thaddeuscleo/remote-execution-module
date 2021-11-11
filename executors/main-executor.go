@@ -1,6 +1,6 @@
 package executors
 
-import "github.com/thaddeuscleo/ruman-execution-module/models"
+import "github.com/thaddeuscleo/remote-execution-module/models"
 
 type GoExecution models.GoExecution
 

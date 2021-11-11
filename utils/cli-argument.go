@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/thaddeuscleo/ruman-execution-module/models"
+	"github.com/thaddeuscleo/remote-execution-module/models"
 )
 
 func GetUserArgs() models.Command {

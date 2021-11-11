@@ -1,3 +1,3 @@
-module github.com/thaddeuscleo/ruman-execution-module
+module github.com/thaddeuscleo/remote-execution-module
 
 go 1.17

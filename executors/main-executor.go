@@ -19,7 +19,7 @@ func ExecuteCommand(command models.Command) {
 		command.Cmd = "uwfmgr filter disable"
 		psExec(command)
 	case "shutdown":
-		command.Cmd = "shutdown /s /f /t 0"
+		command.Cmd = "shutdown.exe /s /f /t 0"
 		psExec(command)
 	case "restart":
 		command.Cmd = "shutdown /r /f /t 0"

@@ -15,17 +15,15 @@ go build main.go
 
 ✅ Wake On Lan
 
+✅ Shutdown
+
+✅ Restart
+
+✅ Deep
+
+✅ Undeep
+
 ❌ Log
-
-❌ Shutdown
-
-❌ Restart
-
-❌ Deep
-
-❌ Undeep
-
-
 
 ## Usage
 

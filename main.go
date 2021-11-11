@@ -21,7 +21,7 @@ func injectEmbedFiles() {
 }
 
 func main() {
-	fmt.Printf("| Minion |\n\n")
+	fmt.Printf("| Roomnetman CLI |\n\n")
 	injectEmbedFiles()
 
 	// get cli arguments

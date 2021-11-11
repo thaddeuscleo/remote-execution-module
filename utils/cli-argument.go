@@ -17,6 +17,9 @@ func GetUserArgs() models.Command {
 	runCmd := flag.NewFlagSet("run", flag.ExitOnError)
 	wakeCmd := flag.NewFlagSet("wake", flag.ExitOnError)
 	shutdownCmd := flag.NewFlagSet("shutdown", flag.ExitOnError)
+	restartCmd := flag.NewFlagSet("restart", flag.ExitOnError)
+	deepCmd := flag.NewFlagSet("deep", flag.ExitOnError)
+	undeepCmd := flag.NewFlagSet("undeep", flag.ExitOnError)
 
 	runUser := runCmd.String("u", "root", "By default the user is set to root")
 	runPassword := runCmd.String("p", "", "The computer(s) password")
@@ -31,8 +34,20 @@ func GetUserArgs() models.Command {
 	shutdownComputer := shutdownCmd.String("c", "1-41", "By the default it is set to computer 1 - 41")
 	shutdownPassword := shutdownCmd.String("p", "", "The computer(s) password")
 
+	restartRoom := restartCmd.String("r", "", "The computer(s) room, ex. 626")
+	restartComputer := restartCmd.String("c", "1-41", "By the default it is set to computer 1 - 41")
+	restartPassword := restartCmd.String("p", "", "The computer(s) password")
+
+	deepRoom := deepCmd.String("r", "", "The computer(s) room, ex. 626")
+	deepComputer := deepCmd.String("c", "1-41", "By the default it is set to computer 1 - 41")
+	deepPassword := deepCmd.String("p", "", "The computer(s) password")
+
+	undeepRoom := undeepCmd.String("r", "", "The computer(s) room, ex. 626")
+	undeepComputer := undeepCmd.String("c", "1-41", "By the default it is set to computer 1 - 41")
+	undeepPassword := undeepCmd.String("p", "", "The computer(s) password")
+
 	if len(os.Args) < 2 {
-		fmt.Println("Expected 'run', 'wake', 'shutdown' subcommands")
+		fmt.Println("Expected 'run', 'wake', 'shutdown', 'restart', 'deep', 'undeep', 'log' subcommands")
 		os.Exit(1)
 	}
 
@@ -85,7 +100,47 @@ func GetUserArgs() models.Command {
 		computers := parseComputer(shutdownComputer, roomCvt)
 		userCmd = models.Command{
 			Type:      "shutdown",
+			User:      "root",
 			Password:  *shutdownPassword,
+			Computers: computers,
+		}
+	case "restart":
+		restartCmd.Parse(os.Args[2:])
+		if *restartRoom == "" {
+			log.Fatal("[Error] Room Is Required")
+		}
+		roomCvt := parseRoom(restartRoom)
+		computers := parseComputer(restartComputer, roomCvt)
+		userCmd = models.Command{
+			Type:      "restart",
+			User:      "root",
+			Password:  *restartPassword,
+			Computers: computers,
+		}
+	case "deep":
+		deepCmd.Parse(os.Args[2:])
+		if *deepRoom == "" {
+			log.Fatal("[Error] Room Is Required")
+		}
+		roomCvt := parseRoom(deepRoom)
+		computers := parseComputer(deepComputer, roomCvt)
+		userCmd = models.Command{
+			Type:      "deep",
+			User:      "root",
+			Password:  *deepPassword,
+			Computers: computers,
+		}
+	case "undeep":
+		undeepCmd.Parse(os.Args[2:])
+		if *undeepRoom == "" {
+			log.Fatal("[Error] Room Is Required")
+		}
+		roomCvt := parseRoom(undeepRoom)
+		computers := parseComputer(undeepComputer, roomCvt)
+		userCmd = models.Command{
+			Type:      "undeep",
+			User:      "root",
+			Password:  *undeepPassword,
 			Computers: computers,
 		}
 	default:

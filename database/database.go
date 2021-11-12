@@ -2,36 +2,33 @@ package database
 
 import (
 	"bytes"
-	"embed"
 	"encoding/csv"
 	"fmt"
 	"io"
 	"strings"
 )
 
-var (
-	db               database
-	ComputerDatabase embed.FS
-)
+var computerListBytes []byte
 
 type database struct {
 	reader *csv.Reader
 }
 
+func SetComputersDatabase(computersListFile []byte) {
+	computerListBytes = computersListFile
+}
+
 func DB() database {
-	if db == (database{}) {
-		file, err := ComputerDatabase.ReadFile("assets/computers.csv")
-		if err != nil {
-			panic("")
-		}
-		db = database{
-			reader: csv.NewReader(bytes.NewBuffer(file)),
-		}
+	if computerListBytes == nil {
+		panic("Computer list is haven't been set")
+	}
+	db := database{
+		reader: csv.NewReader(bytes.NewBuffer(computerListBytes)),
 	}
 	return db
 }
 
-func (database) GetComputerMacAddress(ipAddress string) string {
+func (db database) GetComputerMacAddress(ipAddress string) string {
 	for {
 		record, err := db.reader.Read()
 		if err != io.EOF {
@@ -45,7 +42,7 @@ func (database) GetComputerMacAddress(ipAddress string) string {
 	return ""
 }
 
-func (database) ToString() {
+func (db database) ToString() {
 	for {
 		record, err := db.reader.Read()
 		if err != io.EOF {

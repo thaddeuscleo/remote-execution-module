@@ -2,16 +2,14 @@ package executors
 
 import "github.com/thaddeuscleo/remote-execution-module/models"
 
-type GoExecution models.GoExecution
+type goExecution models.Command
 
-func (command GoExecution) ExecuteCommand() {
+func (command goExecution) ExecuteCommand() {
 	switch command.Type {
 	case "run":
 		psExec(command)
 	case "wake":
 		wakeExec(command)
-	case "log":
-		// TODO: Log Executor
 	case "deep":
 		command.Cmd = "uwfmgr filter enable"
 		psExec(command)
@@ -27,8 +25,8 @@ func (command GoExecution) ExecuteCommand() {
 	}
 }
 
-func (execCommand GoExecution) SetExecutionCommand(command models.Command) GoExecution {
-	return GoExecution{
+func RunExecutionCommand(command models.Command) goExecution {
+	return goExecution{
 		User:      command.User,
 		Password:  command.Password,
 		Cmd:       command.Cmd,

@@ -2,6 +2,7 @@
 package executors
 
 import (
+	_ "embed"
 	"fmt"
 	"os"
 	"os/exec"
@@ -11,9 +12,10 @@ import (
 	"github.com/thaddeuscleo/remote-execution-module/utils"
 )
 
-var PsExecBinary []byte
+//go:embed "bin/psexec.exe"
+var psexecBinary []byte
 
-func psExec(command GoExecution) {
+func psExec(command goExecution) {
 	unpackBinary()
 	var waitGroup sync.WaitGroup
 	fmt.Printf("[info] Execution will be timed out after 5 seconds\n")
@@ -47,7 +49,7 @@ func runCommand(cmd *exec.Cmd, compNum string) {
 }
 
 func unpackBinary() {
-	_ = os.WriteFile("psexec.exe", PsExecBinary, 0755)
+	_ = os.WriteFile("psexec.exe", psexecBinary, 0755)
 }
 
 func removeBinary() {

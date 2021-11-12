@@ -13,7 +13,7 @@ import (
 
 type MagicPacket [102]byte
 
-func wakeExec(command GoExecution) {
+func wakeExec(command goExecution) {
 	var waitGroup sync.WaitGroup
 	for _, computer := range command.Computers {
 		waitGroup.Add(1)

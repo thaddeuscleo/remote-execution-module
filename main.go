@@ -1,4 +1,4 @@
-package rumanexecutionmodule
+package main
 
 import (
 	"embed"

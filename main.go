@@ -22,3 +22,7 @@ func injectEmbedFiles() {
 	database.ComputerDatabase = computerDatabase
 	executors.PsExecBinary = psexecBinary
 }
+
+func main() {
+
+}

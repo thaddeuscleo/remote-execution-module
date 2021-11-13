@@ -4,10 +4,10 @@ import (
 	"errors"
 	"fmt"
 	"net"
+	"strings"
 	"sync"
 
 	"github.com/thaddeuscleo/remote-execution-module/database"
-	"github.com/thaddeuscleo/remote-execution-module/models"
 	"github.com/thaddeuscleo/remote-execution-module/utils"
 )
 
@@ -17,13 +17,14 @@ func wakeExec(command goExecution) {
 	var waitGroup sync.WaitGroup
 	for _, computer := range command.Computers {
 		waitGroup.Add(1)
-		ipaddress := fmt.Sprintf("10.22.%s.%s", computer.Room, computer.Number)
-		content := fmt.Sprintf("waking up: %s\n", ipaddress)
+		content := fmt.Sprintf("waking up: %s\n", computer)
 		utils.LogInfo(content)
-		mac := database.DB().GetComputerMacAddress(ipaddress)
-		go func(mac string, computer models.Computer) {
+		mac := database.DB().GetComputerMacAddress(computer)
+		go func(mac string, ipAddress string) {
 			if packet, err := createMagicPacket(mac); err == nil {
-				packet.send(fmt.Sprintf("10.22.%s.255", computer.Room))
+				broadcastAddress := strings.Split(ipAddress, ".")
+				broadcastAddress[3] = "255"
+				packet.send(strings.Join(broadcastAddress[:], "."))
 			}
 			waitGroup.Done()
 		}(mac, computer)

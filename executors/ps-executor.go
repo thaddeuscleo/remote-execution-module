@@ -8,7 +8,6 @@ import (
 	"os/exec"
 	"sync"
 
-	"github.com/thaddeuscleo/remote-execution-module/models"
 	"github.com/thaddeuscleo/remote-execution-module/utils"
 )
 
@@ -21,9 +20,9 @@ func psExec(command goExecution) {
 	fmt.Printf("[info] Execution will be timed out after 5 seconds\n")
 	for _, comp := range command.Computers {
 		waitGroup.Add(1)
-		cmd := exec.Command("./psexec.exe", fmt.Sprintf("\\\\10.22.%s.%s", comp.Room, comp.Number), "-u", command.User, "-p", command.Password, "-n", "5", "-i", "cmd.exe", "/c", command.Cmd)
-		go func(comp models.Computer) {
-			runCommand(cmd, fmt.Sprintf("10.22.%s.%s", comp.Room, comp.Number))
+		cmd := exec.Command("./psexec.exe", fmt.Sprintf("\\\\%s", comp), "-u", command.User, "-p", command.Password, "-n", "5", "-i", "cmd.exe", "/c", command.Cmd)
+		go func(comp string) {
+			runCommand(cmd, comp)
 			waitGroup.Done()
 		}(comp)
 	}
